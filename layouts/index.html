@@ -1,0 +1,113 @@
+
+{{ partial "header.html" . }}
+
+<main id="list" role="main">
+<!-- Hero image -->
+<div id="main-hero" class="hero-body">
+    <div class="container has-text-centered">
+        <div class="columns is-vcentered">
+            <div class="column is-6 is-offset-3 has-text-centered is-header-caption">
+                <h1 class="title main-title subpage-title text-bold is-2">
+                    {{ .Site.Params.subtitle }}
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Hero image -->
+</div>
+<!-- /Hero and nav -->
+
+<!-- Blog post list section -->
+<section class="section is-medium blog-section section-light-grey">
+<div class="container">
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            {{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
+            {{ range $paginator.Pages }}
+
+            <!-- Blog post -->
+            <div class="flex-card is-post light-bordered">
+                <!-- Post header -->
+                <div class="header has-background-image" data-background="./post/{{ .Params.bannerRes}}" style="background-color: rgb(0, 0, 0); opacity: 0.85;">
+                    <div class="title-wrapper">
+                        <h2 class="post-title">{{ .Title}}</h2>
+                        {{ if .Description }}
+                        <h4 class="post-subtitle">{{ .Description }}</h4>
+                        {{ end }}
+                    </div>
+                    <div class="author-avatar"><img src="{{ .Params.authorAvatar }}" alt=""></div>
+                </div>
+                <!-- Post body -->
+                <div class="post-body">
+                    <small>{{ .Date.Format "2006年1月2日" }}</small>
+                    <div><span>作者</span> <a class="author-name"><b>{{ .Params.author }}</b></a></div>
+                    <p>{{ .Summary }}</p>
+                    {{ if .Truncated }}
+                    <div class="content-footer">
+                        <div class="footer-details">
+                            <a class="button is-link btn-upper" href="{{ .Permalink }}">阅读更多</a>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            <!-- /Blog post -->
+            {{ end }}
+        </div>
+        <!-- Blog sidebar -->
+        <!-- <div class="column"> -->
+                <!-- Recent posts -->
+                <!-- <div class="flex-card light-bordered">
+                    <div class="card-header">近期文章</div>
+                    <div class="card-panel">
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <div class="post-title">
+                                    <a href="#">How design has become critical</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Blog archives -->
+                <!-- <div class="flex-card light-bordered">
+                    <div class="card-header">归档</div>
+                    <div class="card-panel">
+                        <div class="archives">
+                            <div class="archived-month">
+                                <span><a href="#">June 2017</a></span>
+                                <span class="b-badge badge-outlined rounded">3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Blog categories -->
+                <!-- <div class="flex-card light-bordered">
+                    <div class="card-header">分类</div>
+                    <div class="card-panel">
+                        <div class="post-categories">
+                            <div class="post-category">
+                                <span><a href="#">Webdesign</a></span>
+                                <span class="b-badge badge-outlined rounded is-primary">131</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Post tags -->
+                <!-- <div class="flex-card light-bordered">
+                    <div class="card-header">标签</div>
+                    <div class="card-panel padding-20">
+                        <span class="tag is-outlined is-primary">Ecommerce</span>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+            <!-- /Blog sidebar -->
+    </div>
+</div>
+</section>
+<!-- /Blog post list section -->
+</main>
+
+{{ partial "footer.html" . }}

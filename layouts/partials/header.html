@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+
+<head>
+    <!-- Required Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{{ $isHomePage := eq .Title .Site.Title }}{{ .Title }}{{ if eq $isHomePage false }} | {{ .Site.Title }}{{ end }}</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+
+    <!--Core CSS -->
+    <link rel="stylesheet" href="/assets/css/bulma.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/core_flashy.css">
+
+</head>
+
+<body>
+    <div class="pageloader"></div>
+    <div class="infraloader is-active"></div>
+
+    <!-- Hero (Parallax) and nav -->
+    <div class="hero parallax is-cover is-relative is-default is-bold" data-background="{{ .Site.Params.banner }}"
+        data-color="#000" data-color-opacity="0.3">
+        <nav class="navbar navbar-wrapper navbar-fade navbar-light is-transparent">
+            <div class="container">
+                <!-- Brand -->
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        <img class="light-logo" src="/assets/images/logos/bulkit-white.svg" alt="">
+                        <img class="dark-logo" src="/assets/images/logos/bulkit-green.svg" alt="">
+                    </a>
+                    <!-- Responsive toggle -->
+                    <div class="custom-burger" data-target="">
+                        <a id="" class="responsive-btn" href="javascript:void(0);">
+                            <span class="menu-toggle">
+                                <span class="icon-box-toggle">
+                                    <span class="rotate">
+                                        <i class="icon-line-top"></i>
+                                        <i class="icon-line-center"></i>
+                                        <i class="icon-line-bottom"></i>
+                                    </span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- /Responsive toggle -->
+                </div>
+                <!-- Navbar menu -->
+                <div class="navbar-menu">
+                    <!-- Navbar Start -->
+                    <div class="navbar-start">
+                        <!-- Navbar item -->
+                        <a class="navbar-item is-slide" href="/">
+                            首页
+                        </a>
+                        {{ range .Site.Menus.main }}
+                        <!-- Navbar item -->
+                        <a class="navbar-item is-slide" href="{{ .URL }}">
+                            {{ .Name }}
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </nav>

@@ -1,0 +1,106 @@
+{{ partial "header.html" . }}
+
+<!-- Hero image -->
+<div id="main-hero" class="hero-body blog-hero">
+        <div class="container has-text-centered">
+            <h1 class="title flex-title main-title text-bold is-2">
+                {{ if .Next }}{{ end }}
+                <span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="right" data-title="Previous post">keyboard_arrow_left</span>
+                <span class="subpage-title">{{ .Title }}</span>
+                {{ if .Prev }}{{ end }}
+                <span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="left" data-title="Next post">keyboard_arrow_right</span>
+            </h1>
+        </div>
+    </div>
+    <!-- /Hero image -->
+</div>
+<!-- /Hero and nav -->
+
+<!-- Post section -->
+<section class="section blog-section section-light-grey">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-10 is-offset-1">
+                <!-- Post -->
+                <div class="flex-card is-full-post light-bordered">
+                    <!-- Post meta -->
+                    <div class="post-meta content">
+                        <!-- title -->
+                        <div class="title-block">
+                            <h2>{{ .Description }}</h2>
+                            <h4>{{ .Date.Format "2006年1月2日" }}</h4>
+                            <div><span>作者</span> <a class="author-name"><b>{{ .Params.author }}</b></a></div>
+                        </div>
+                    </div>
+
+                    <!-- Post body -->
+                    <div class="post-body content">
+                        {{ .Content }}
+
+                        <!-- Share post -->
+                        <div class="share-post">
+                            <div class="share-text">
+                                Share:
+                            </div>
+                            <!-- Sharing icons -->
+                            <div class="sharing-options">
+                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-linkedin"></i>
+                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-reddit"></i>
+                                <i class="fa fa-tumblr"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Post -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Post section -->
+
+
+
+
+
+
+
+<!-- <main id="single" role="main">
+    <div class="article-header">
+        <h1>{{ .Title }}</h1>
+        <div class="meta">
+            {{ .Date.Format "Jan 2, 2006" }} &nbsp;
+            {{ range .Params.tags }}
+            #<a href="/tags/{{ . | urlize }}">{{ . }}</a>&nbsp;
+            {{ end }}
+        </div>
+    </div>
+    <article>
+        {{ .Content }}
+
+        {{ with .Site.Params.shareThis }}
+        <div id="share-this" class="col span_10">
+            <span class='st_twitter_large' displayText='Tweet'></span>
+            <span class='st_facebook_large' displayText='Facebook'></span>
+            <span class='st_googleplus_large' displayText='Google +'></span>
+            <span class='st_pocket_large' displayText='Pocket'></span>
+            <span class='st_sharethis_large' displayText='ShareThis'></span>
+            <span class='st_email_large' displayText='Email'></span>
+        </div>
+        {{ end }}
+    </article>
+</main> -->
+
+<!-- <nav class="pagination-single">
+    {{ if .Next }}
+    <span class="previous">&larr; <a href="{{ .Next.Permalink }}" rel="prev">{{ .Next.Title }}</a></span>
+    {{ end }}
+    {{ if .Prev }}
+    <span class="next"><a href="{{ .Prev.Permalink }}" rel="next">{{ .Prev.Title }}</a> &rarr;</span>
+    {{ end }}
+</nav> -->
+
+{{ partial "footer.html" . }}
