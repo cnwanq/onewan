@@ -22,7 +22,7 @@
 <section class="section is-medium blog-section section-light-grey">
 <div class="container">
     <div class="columns">
-        <div class="column is-8 is-offset-2">
+        <div class="column is-9 is-offset-0">
             {{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
             {{ range $paginator.Pages }}
 
@@ -56,20 +56,27 @@
             {{ end }}
         </div>
         <!-- Blog sidebar -->
-        <!-- <div class="column"> -->
+        <div class="column">
                 <!-- Recent posts -->
-                <!-- <div class="flex-card light-bordered">
+                {{- $recent := where .Site.RegularPages "Section" "in" (.Site.Params.postSections | default (slice "post")) }}
+                {{- $recent_num := (.Site.Params.widgets.recent_num | default 10) }}
+                {{- if $recent }}
+                <div class="flex-card light-bordered">
                     <div class="card-header">近期文章</div>
                     <div class="card-panel">
                         <div class="recent-posts">
+                            {{- range first $recent_num $recent }}
                             <div class="recent-post">
                                 <div class="post-title">
-                                    <a href="#">How design has become critical</a>
+                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                                 </div>
                             </div>
+                            {{- end }}
                         </div>
                     </div>
-                </div> -->
+                </div>
+                {{- end }}
+
                 <!-- Blog archives -->
                 <!-- <div class="flex-card light-bordered">
                     <div class="card-header">归档</div>
@@ -83,26 +90,38 @@
                     </div>
                 </div> -->
 
-                <!-- Blog categories -->
-                <!-- <div class="flex-card light-bordered">
-                    <div class="card-header">分类</div>
-                    <div class="card-panel">
-                        <div class="post-categories">
-                            <div class="post-category">
-                                <span><a href="#">Webdesign</a></span>
-                                <span class="b-badge badge-outlined rounded is-primary">131</span>
-                            </div>
+            <!-- Blog categories -->
+            {{- if isset .Site.Taxonomies "categories" }}
+            {{- if not (eq (len .Site.Taxonomies.categories) 0) }}
+            <div class="flex-card light-bordered">
+                <div class="card-header">分类</div>
+                <div class="card-panel">
+                    <div class="post-categories">
+                    {{- range $name, $items := .Site.Taxonomies.categories }}
+                        <div class="post-category">
+                            <span><a href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | title | humanize }}</a></span>
+                            <span class="b-badge badge-outlined rounded is-primary">{{ len $items }}</span>
                         </div>
+                    {{- end }}
                     </div>
-                </div> -->
-                <!-- Post tags -->
-                <!-- <div class="flex-card light-bordered">
-                    <div class="card-header">标签</div>
-                    <div class="card-panel padding-20">
-                        <span class="tag is-outlined is-primary">Ecommerce</span>
-                    </div>
-                </div> -->
-            <!-- </div> -->
+                </div>
+            </div>
+            {{- end }}
+            {{- end }}
+
+            <!-- Post tags -->
+            {{- if isset .Site.Taxonomies "tags" }}
+            {{- if not (eq (len .Site.Taxonomies.tags) 0) }}
+            <div class="flex-card light-bordered">
+                <div class="card-header">标签</div>
+                <div class="card-panel padding-20">
+                    {{- range $name, $items := .Site.Taxonomies.tags }}
+                    <a href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}"><span class="tag is-outlined is-primary">{{ $name | humanize }}</span></a>
+                    {{- end }}
+                </div>
+            </div>
+            {{- end }}
+            {{- end }}
             <!-- /Blog sidebar -->
     </div>
 </div>

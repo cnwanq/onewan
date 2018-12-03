@@ -4,11 +4,17 @@
 <div id="main-hero" class="hero-body blog-hero">
         <div class="container has-text-centered">
             <h1 class="title flex-title main-title text-bold is-2">
-                {{ if .Next }}{{ end }}
-                <span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="right" data-title="上一篇">keyboard_arrow_left</span>
+                {{ if .Prev }}
+                <a style="color:white" href="{{ .Prev.URL }}"><span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="right" data-title="{{ .Prev.Title }}">keyboard_arrow_left</span></a>
+                {{ else }}
+                <span class="material-icons is-hidden-mobile is-disabled" data-toggle="tooltip" data-placement="right" data-title="上一篇">keyboard_arrow_left</span>
+                {{ end }}
                 <span class="subpage-title">{{ .Title }}</span>
-                {{ if .Prev }}{{ end }}
-                <span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="left" data-title="下一篇">keyboard_arrow_right</span>
+                {{ if .Next }}
+                <a style="color:white" href="{{ .Next.URL }}"><span class="material-icons is-hidden-mobile" data-toggle="tooltip" data-placement="left" data-title="{{ .Next.Title }}">keyboard_arrow_right</span></a>
+                {{ else }}
+                <span class="material-icons is-hidden-mobile is-disabled" data-toggle="tooltip" data-placement="left" data-title="下一篇">keyboard_arrow_right</span>
+                {{ end }}
             </h1>
         </div>
     </div>
@@ -20,7 +26,7 @@
 <section class="section blog-section section-light-grey">
     <div class="container">
         <div class="columns">
-            <div class="column is-10 is-offset-1">
+            <div class="column is-10 is-offset-0">
                 <!-- Post -->
                 <div class="flex-card is-full-post light-bordered">
                     <!-- Post meta -->
@@ -56,6 +62,20 @@
                     </div>
                 </div>
                 <!-- /Post -->
+            </div>
+            <div class="column">
+                <div class="flex-card light-bordered">
+                    <div class="card-header">TOC</div>
+                    <div class="card-panel">
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <div class="post-title">
+                                    {{ .TableOfContents }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

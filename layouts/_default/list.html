@@ -1,20 +1,40 @@
 {{ partial "header.html" . }}
 
-  <!-- Main Section Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <main id="list" role="main">
-    <div class="article-header light-gray"><h1>#{{ .Title }}</h1></div>
-    {{ range .Data.Pages }}
-    <div class="summary">
-      <h2><a href="{{ .Permalink }}">{{ .Title }} {{ if .Draft }}:: DRAFT{{end}}</a></h2>
-      <div class="meta">
-        {{ .Date.Format "Jan 2, 2006" }} &nbsp;
-        {{ range .Params.tags }}
-          #<a href="/tags/{{ . | urlize }}">{{ . }}</a>&nbsp;
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
-  </main>
+<!-- Main Section Layout -->
+
+<!-- Hero image -->
+<div id="main-hero" class="hero-body blog-hero">
+	<div class="container has-text-centered">
+		<h1 class="title flex-title main-title text-bold is-2">
+			<span class="is-hidden-mobile is-disabled"></span>
+			<span class="subpage-title">{{ .Title }}</span>
+			<span class="is-hidden-mobile is-disabled"></span>
+		</h1>
+	</div>
+</div>
+<!-- /Hero image -->
+</div>
+<!-- /Hero and nav -->
+
+<!-- Post section -->
+<section class="section blog-section section-light-grey">
+	<div class="container">
+		<div class="columns">
+			<div class="column is-8 is-offset-2">
+				<div class="flex-card is-full-post light-bordered">
+					{{ range .Data.Pages }}
+					<div class="post-meta content">
+						<div class="title-block">
+							<h4>{{ .Date.Format "Jan 2, 2006" }}</h4>
+							{{ range .Params.tags }}
+							<a href="/tags/{{ . | urlize }}">{{ . }}</a>
+							{{ end }}
+						</div>
+					</div>
+					{{ end }}
+				</div>
+			</div>
+		</div>
+</section>
 
 {{ partial "footer.html" . }}
